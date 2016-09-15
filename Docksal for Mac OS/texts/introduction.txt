@@ -1,0 +1,6 @@
+
+					WARNING! 
+
+If you have any Virtual Box machines running they will be powered off before installation.
+
+If there is any data that can be lost please stop your VMs manually before proceeding.

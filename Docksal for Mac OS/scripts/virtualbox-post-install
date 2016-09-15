@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+## Installs bundled VirtualBox.pkg
+
+INSTALL_LOG="/tmp/docksal.installation.log"
+echo "[DOCKSAL] virtualbox-post-install" >> "$INSTALL_LOG"
+
+echo "[DOCKSAL] Installing VirtualBox..."
+installer -pkg VirtualBox.pkg -target / >>$INSTALL_LOG 2>>$INSTALL_LOG

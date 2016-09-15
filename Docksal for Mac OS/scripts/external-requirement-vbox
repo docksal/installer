@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+## Check that VirtualBox version user currently has is not higher
+## that the one we a re going to install
+## Otherwise warns user
+## 
+## Used in Project requirement and in VirtualBox presentation requirement
+
+# Convert version string like 1.2.3 to integer for comparison
+# param $1 version string of 3 components max (e.g. 1.10.3)
+ver_to_int ()
+{
+	printf "%03d%03d%03d" $(echo "$1" | tr '.' ' ')
+}
+
+BUNDLED_VERSION=$(cat "VirtualBox.VERSION.txt")
+
+# if no VirtualBox installed then quit
+[[ ! -x '/usr/local/bin/vboxmanage' ]] && exit 0
+
+virtualbox_version=$(/usr/local/bin/vboxmanage -v | sed "s/r.*//")
+
+if [[ "$1" == "--warn-higher" ]]; then
+	[[ $(ver_to_int "$virtualbox_version") > $(ver_to_int "$BUNDLED_VERSION") ]] && exit 1
+elif [[ "$1" == "--warn-equal" ]]; then
+	[[ $(ver_to_int "$virtualbox_version") == $(ver_to_int "$BUNDLED_VERSION") ]] && exit 1
+fi
+
+exit 0

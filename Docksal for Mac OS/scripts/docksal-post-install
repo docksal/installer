@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+## Links binaries from user ~/.docksal/bin folder to 
+## the place of installation in /Applications
+
+INSTALL_LOG="/tmp/docksal.installation.log"
+echo "[DOCKSAL] docksal-post-install" >> "$INSTALL_LOG"
+
+BIN_DIR="$HOME/.docksal/bin"
+mkdir -p "$BIN_DIR" 2 >>$INSTALL_LOG
+
+echo "[DOCKSAL] Linking docker bin..." >>$INSTALL_LOG
+rm "$BIN_DIR/docker" >>$INSTALL_LOG 2>>$INSTALL_LOG &&
+	ln -s /Applications/Docksal/docker "$BIN_DIR/docker" >>$INSTALL_LOG
+
+echo "[DOCKSAL] Linking docker-compose bin" >>$INSTALL_LOG
+rm "$BIN_DIR/docker-compose" >>$INSTALL_LOG 2>>$INSTALL_LOG &&
+	ln -s /Applications/Docksal/docker-compose "$BIN_DIR/docker-compose" >>$INSTALL_LOG 2>>$INSTALL_LOG
+
+echo "[DOCKSAL] Linking docker-machine bin" >>$INSTALL_LOG
+rm "$BIN_DIR/docker-machine" >>$INSTALL_LOG 2>>$INSTALL_LOG &&
+	ln -s /Applications/Docksal/docker-machine "$BIN_DIR/docker-machine" >>$INSTALL_LOG 2>>$INSTALL_LOG
+
+chown -HR $USER "$BIN_DIR/"
+
+if [[ -x "$BIN_DIR/docker" ]] && [[ -x "$BIN_DIR/docker-compose" ]] && [[ -x "$BIN_DIR/docker-machine" ]]; then
+	(exit)
+else
+	echo "[DOCKSAL] Something is wrong with binaries..." >> $INSTALL_LOG
+	(exit 1)
+fi

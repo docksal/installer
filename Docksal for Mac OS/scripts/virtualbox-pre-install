@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+## Closes VirtualBox UI otherwise VirtualBox will not install
+## Stops all running machines or otherwise VirtualBox will not install
+
+INSTALL_LOG="/tmp/docksal.installation.log"
+echo "[DOCKSAL] virtualbox-pre-install" > "$INSTALL_LOG"
+
+if [[ -x '/usr/local/bin/vboxmanage' ]]; then
+
+	echo "[DOCKSAL] Closing VirtualBox UI..." >>$INSTALL_LOG
+	ps ax | grep -i virtualbox$ | cut -d " " -f 1 | xargs kill
+	echo "[DOCKSAL] Stopping all VMs..." >>$INSTALL_LOG
+	runningvms=$(su $USER -c "/usr/local/bin/vboxmanage list runningvms")
+	echo "$runningvms" 1>>$INSTALL_LOG
+	echo "$runningvms" | sed 's/^"\(.*\)".*/\1/' | xargs -L1 -I {} su $USER -c "/usr/local/bin/vboxmanage controlvm {} poweroff"
+
+	if [[ "$runningvms" != "" ]]; then
+		sleep 5
+	fi
+fi
