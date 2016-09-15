@@ -1,3 +1,3 @@
 # Docksal Toolbox
 
-Installers for Docksal
+Installers for [Docksal](https://github.com/docksal/docksal)
