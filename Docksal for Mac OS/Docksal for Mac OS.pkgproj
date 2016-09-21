@@ -574,9 +574,9 @@
 				<key>POSTINSTALL_PATH</key>
 				<dict>
 					<key>PATH</key>
-					<string>/Users/alexei.chekulaev/Projects/drude/docksal-build/Docksal for Mac OS/scripts/docksal-post-install</string>
+					<string>scripts/docksal-post-install</string>
 					<key>PATH_TYPE</key>
-					<integer>0</integer>
+					<integer>1</integer>
 				</dict>
 				<key>RESOURCES</key>
 				<array/>
@@ -1020,16 +1020,16 @@
 				<key>POSTINSTALL_PATH</key>
 				<dict>
 					<key>PATH</key>
-					<string>/Users/alexei.chekulaev/Projects/drude/docksal-build/Docksal for Mac OS/scripts/virtualbox-post-install</string>
+					<string>scripts/virtualbox-post-install</string>
 					<key>PATH_TYPE</key>
-					<integer>0</integer>
+					<integer>1</integer>
 				</dict>
 				<key>PREINSTALL_PATH</key>
 				<dict>
 					<key>PATH</key>
-					<string>/Users/alexei.chekulaev/Projects/drude/docksal-build/Docksal for Mac OS/scripts/virtualbox-pre-install</string>
+					<string>scripts/virtualbox-pre-install</string>
 					<key>PATH_TYPE</key>
-					<integer>0</integer>
+					<integer>1</integer>
 				</dict>
 				<key>RESOURCES</key>
 				<array>
